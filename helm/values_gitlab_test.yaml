@@ -1,4 +1,4 @@
-namespace: mafia
+namespace: mafia-test
 backend:
   image: <%PROJECT__f3a3a0c2-9850-4341-b3d7-0570c5007b46__master%>
   replicaCount: 1
