@@ -66,7 +66,7 @@ spec:
     spec:
       containers:
       - name: mafia-backend-container
-        image: https://gitlab.com/mafia5/mafia-deployment@sha1:8b2d07a279d3a0132e1d7b284ba185b5f11b89e6
+        image: https://gitlab.com/mafia5/mafia-deployment@sha1:b73ef1018693f9ca4eb818480de68b7e7594baa2
         env:
         - name: REDIS_HOST
           value: redis-service.mafia
