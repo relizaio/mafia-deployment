@@ -13,6 +13,8 @@
   echo "Response from Reliza:"
   reliza_helm_check=$(cat reliza_helm_check)
   echo $reliza_helm_check
+  rm digest_file
+  rm reliza_helm_check
   # little sleep is needed to make sure we calculate if condition correctly
   sleep 5
 
@@ -21,7 +23,7 @@
   then
     
     # obtain version
-    RLZ_VER_JSON=$(docker run --rm relizaio/reliza-cli getversion -u $RELIZA_HUB_URI -i $HELM_PROJECT_API_ID -k $HELM_PROJECT_API_KEY -b $CI_COMMIT_REF_NAME --metadata GitLab)
+    RLZ_VER_JSON=$(docker run --rm relizaio/reliza-cli getversion -u $RELIZA_HUB_URI -i $HELM_PROJECT_API_ID -k $HELM_PROJECT_API_KEY -b $CI_COMMIT_REF_NAME)
     echo "reliza version json found: $RLZ_VER_JSON"
     RLZ_FULL_VER=$(echo $RLZ_VER_JSON | docker run -i --rm relizaio/jq -r ".version")
     echo "RLZ_FULL_VER = $RLZ_FULL_VER"
@@ -48,6 +50,7 @@
     cat digest_file
 
     # Construct Reliza command to stream version to reliza
+    echo -n " -u $RELIZA_HUB_URI -i $RELIZA_PROJECT_API_ID -k $RELIZA_PROJECT_API_KEY " >> reliza_command
     echo -n "--artid mafia-helm-chart-$RLZ_FULL_VER " >> reliza_command
     echo -n "--artbuildid gitlabCI_$CI_JOB_ID " >> reliza_command
     echo -n "--artcimeta GitLab CI build " >> reliza_command
@@ -55,7 +58,7 @@
     echo -n "--artdigests $(cat digest_file) " >> reliza_command
     echo -n "--datestart $BUILD_START " >> reliza_command
     echo -n "--dateend $(date -Iseconds) " >> reliza_command
-    echo -n "-b $CI_COMMIT_REF_NAME --vcstype git --commit $commit_sha -u $RELIZA_HUB_URI -i $RELIZA_PROJECT_API_ID -k $RELIZA_PROJECT_API_KEY --vcsuri $CI_PROJECT_URL --date $(git log -1 --date=iso-strict --pretty='%ad') -v $RLZ_FULL_VER" >> reliza_command
+    echo -n "-b $CI_COMMIT_REF_NAME --vcstype git --commit $commit_sha --vcsuri $CI_PROJECT_URL --date $(git log -1 --date=iso-strict --pretty='%ad') -v $RLZ_FULL_VER" >> reliza_command
     cat reliza_command
     # send version to reliza
     echo "sending version to reliza"
