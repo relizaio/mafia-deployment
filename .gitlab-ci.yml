@@ -3,7 +3,6 @@
   dir=helm; find "$dir" -type f -exec sha256sum {} \; | sed "s~$dir~~g" | sort -d | sha256sum | cut -d ' ' -f 1 >> digest_file
   echo Initial Digest:
   cat digest_file
-
   # call reliza and see if this file system artifact was already registered before
   docker run --rm relizaio/reliza-cli checkhash \
   -u RELIZA_HUB_URI \
