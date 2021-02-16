@@ -50,7 +50,7 @@
     cat digest_file
 
     # Construct Reliza command to stream version to reliza
-    echo -n " -u $RELIZA_HUB_URI -i $RELIZA_PROJECT_API_ID -k $RELIZA_PROJECT_API_KEY " >> reliza_command
+    echo -n " -u $RELIZA_HUB_URI -i $HELM_PROJECT_API_ID -k $HELM_PROJECT_API_KEY " >> reliza_command
     echo -n "--artid mafia-helm-chart-$RLZ_FULL_VER " >> reliza_command
     echo -n "--artbuildid gitlabCI_$CI_JOB_ID " >> reliza_command
     echo -n "--artcimeta GitLab CI build " >> reliza_command
