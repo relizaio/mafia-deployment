@@ -21,7 +21,7 @@ rlzclientout=$(docker run --rm relizaio/reliza-cli    \
     -u https://rhythm.relizahub.com \
     -i INSTANCE__cb584aff-fe0e-4f79-97f4-3a8c3a0d233e    \
     -k $1    \
-    --project f3a3a0c2-9850-4341-b3d7-0570c5007b46    \
+    --project 68553af9-489f-4810-8406-d20d926ab630    \
     --branch master    \
     --env TEST    \
     --instance cb584aff-fe0e-4f79-97f4-3a8c3a0d233e   \
@@ -34,7 +34,7 @@ rlzclientout=$(docker run --rm relizaio/reliza-cli    \
     -u https://rhythm.relizahub.com \
     -i INSTANCE__cb584aff-fe0e-4f79-97f4-3a8c3a0d233e    \
     -k $1    \
-    --project a5bee672-016e-40c5-bbf1-06c54569b759    \
+    --project 495b5cd4-50f5-4539-870d-c71557ad6075    \
     --branch master    \
     --env TEST    \
     --instance cb584aff-fe0e-4f79-97f4-3a8c3a0d233e   \

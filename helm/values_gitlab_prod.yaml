@@ -1,11 +1,11 @@
 namespace: mafia
 backend:
-  image: <%PROJECT__f3a3a0c2-9850-4341-b3d7-0570c5007b46__master%>
+  image: <%PROJECT__68553af9-489f-4810-8406-d20d926ab630__master%>
   replicaCount: 1
   port: 3000
   targetPort: 3000
 ui:
-  image: <%PROJECT__a5bee672-016e-40c5-bbf1-06c54569b759__master%>
+  image: <%PROJECT__495b5cd4-50f5-4539-870d-c71557ad6075__master%>
   replicaCount: 1
   port: 80
   targetPort: 80
