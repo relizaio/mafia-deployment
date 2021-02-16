@@ -18,12 +18,12 @@ echo "old ui image = $old_ui_image"
 # note that sed is required to remove docker tag if supplied, since k8s doesn't have it
 rlzclientout=$(docker run --rm relizaio/reliza-cli    \
     getlatestrelease    \
-    -u ${2-https://relizahub.com} \
+    -u https://rhythm.relizahub.com \
     -i INSTANCE__cb584aff-fe0e-4f79-97f4-3a8c3a0d233e    \
     -k $1    \
     --project f3a3a0c2-9850-4341-b3d7-0570c5007b46    \
     --branch master    \
-    --env PRODUCTION    \
+    --env TEST    \
     --instance cb584aff-fe0e-4f79-97f4-3a8c3a0d233e   \
     --namespace mafia);    \
     backend_image_hash=$(echo $rlzclientout | /usr/bin/jq -r .artifactDetails[0].digests[] | grep sha256);    \
@@ -31,12 +31,12 @@ rlzclientout=$(docker run --rm relizaio/reliza-cli    \
 
 rlzclientout=$(docker run --rm relizaio/reliza-cli    \
     getlatestrelease    \
-    -u ${2-https://relizahub.com} \
+    -u https://rhythm.relizahub.com \
     -i INSTANCE__cb584aff-fe0e-4f79-97f4-3a8c3a0d233e    \
     -k $1    \
     --project a5bee672-016e-40c5-bbf1-06c54569b759    \
     --branch master    \
-    --env PRODUCTION    \
+    --env TEST    \
     --instance cb584aff-fe0e-4f79-97f4-3a8c3a0d233e   \
     --namespace mafia);    \
     ui_image_hash=$(echo $rlzclientout | /usr/bin/jq -r .artifactDetails[0].digests[] | grep sha256);    \
@@ -48,7 +48,7 @@ echo "new backend image = $backend_image"
 if [ "$backend_image" != "$old_backend_image" ] || [ "$ui_image" != "$old_ui_image" ] || [ "$3" = "force" ]
 then
 	echo "New images detected, proceeding with upgrade"
-	/usr/local/bin/helm upgrade mafia --kubeconfig /etc/rancher/k3s/k3s.yaml --set backend.image=$backend_image,ui.image=$ui_image -f ${0%/*}/helm/values_prod.yaml ${0%/*}/helm/
+	/usr/local/bin/helm upgrade mafia --kubeconfig /etc/rancher/k3s/k3s.yaml --set backend.image=$backend_image,ui.image=$ui_image -f /home/rhythm/mafia/mafia-deployment/helm/values_gitlab_prod.yaml /home/rhythm/mafia/mafia-deployment/helm/
 else
 	echo "No new images, skipping upgrade"
 fi
