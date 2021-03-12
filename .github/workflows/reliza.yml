@@ -14,7 +14,7 @@ jobs:
         run: |
           # get version
           docker pull relizaio/reliza-cli
-          docker run --rm relizaio/reliza-cli getversion -k ${{ secrets.RELIZA_API_KEY }} -i ${{ secrets.RELIZA_API_ID }} -b $GITHUB_REF --metadata GitHub > full_version_output 2>&1
+          docker run --rm relizaio/reliza-cli getversion -u ${{ secrets.RELIZA_HUB_URI }}  -k ${{ secrets.RELIZA_API_KEY }} -i ${{ secrets.RELIZA_API_ID }} -b $GITHUB_REF --metadata GitHub > full_version_output 2>&1
           # show reliza command output in case there is error
           cat full_version_output
           cat full_version_output | jq -r ".version" > version
@@ -26,7 +26,7 @@ jobs:
           echo -n "--artcimeta GitHub Actions " >> reliza_command
           echo -n "--arttype file " >> reliza_command
           echo -n "--artdigests sha1:$GITHUB_SHA " >> reliza_command
-          echo -n "-b $GITHUB_REF --vcstype git --commit $GITHUB_SHA -k ${{ secrets.RELIZA_API_KEY }} -i ${{ secrets.RELIZA_API_ID }} --vcsuri github.com/$GITHUB_REPOSITORY \
+          echo -n "-b $GITHUB_REF --vcstype git --commit $GITHUB_SHA  -u ${{ secrets.RELIZA_HUB_URI }} -k ${{ secrets.RELIZA_API_KEY }} -i ${{ secrets.RELIZA_API_ID }} --vcsuri github.com/$GITHUB_REPOSITORY \
               -v $vvar" >> reliza_command
           cat reliza_command
           # send version to reliza
