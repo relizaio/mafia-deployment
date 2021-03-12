@@ -1,0 +1,15 @@
+namespace: mafia
+backend:
+  image: <%PROJECT__d1cffee7-0cc7-42aa-8da2-65e1d5d5958d__master%>
+  replicaCount: 1
+  port: 3000
+  targetPort: 3000
+ui:
+  image: <%PROJECT__5e183ec2-642d-4455-aeac-56c02d5e03d6__master%>
+  replicaCount: 1
+  port: 80
+  targetPort: 80
+ingress:
+  nginxEnabled: false
+  traefikEnabled: true
+  host: mafia.test.relizahub.com

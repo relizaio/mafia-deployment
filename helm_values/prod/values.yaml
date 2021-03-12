@@ -1,0 +1,15 @@
+namespace: mafia
+backend:
+  image: registry.test.relizahub.com/bfcb7315-8907-4c02-90ea-74f84a12b42f/mafia-express@sha256:956c1bbac0a40799615635f137437ceaa6414494c5157aa85a9fdfd3ee2a4df5
+  replicaCount: 1
+  port: 3000
+  targetPort: 3000
+ui:
+  image: registry.test.relizahub.com/bfcb7315-8907-4c02-90ea-74f84a12b42f/mafia-vue@sha256:e630efe2b472c5f5a36b6fd907ea817e3204fc80ca8e31234c7e90b5fb4cdc82
+  replicaCount: 1
+  port: 80
+  targetPort: 80
+ingress:
+  nginxEnabled: false
+  traefikEnabled: true
+  host: mafia.test.relizahub.com
