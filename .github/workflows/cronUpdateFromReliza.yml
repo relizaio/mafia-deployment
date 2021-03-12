@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       BUILD_ENV_PARAMS: ${{ secrets.BUILD_ENV_PARAMS }}
-      INDIRECTORY: ${{ secrets.INDIRECTORY }}
+      HELM_VALUES_DIR: ${{ secrets.HELM_VALUES_DIR }}
       RELIZA_API_ID: ${{ secrets.RELIZA_ORGANIZATION_API_ID }}
       RELIZA_API_KEY: ${{ secrets.RELIZA_ORGANIZATION_API_KEY }}
       RELIZA_HUB_URI: ${{ secrets.RELIZA_HUB_URI }}
@@ -103,7 +103,7 @@ jobs:
           for envbuild in "${ENV_BUILDS[@]}"; do
             # chmod 0777 $GITHUB_WORKSPACE/${SPLIT_BUILD_ENV[1]}
             IFS="|" read -ra SPLIT_BUILD_ENV <<< "$envbuild"
-            docker run --rm -u root -v $GITHUB_WORKSPACE/$INDIRECTORY/:/indir -v $GITHUB_WORKSPACE/${SPLIT_BUILD_ENV[1]}/:/outdir relizaio/reliza-cli parsetemplate -i $RELIZA_API_ID -k $RELIZA_API_KEY ${SPLIT_BUILD_ENV[0]}
+            docker run --rm -u root -v $GITHUB_WORKSPACE/$HELM_VALUES_DIR/${SPLIT_BUILD_ENV[1]}/template:/indir -v $GITHUB_WORKSPACE/$HELM_VALUES_DIR/${SPLIT_BUILD_ENV[1]}/:/outdir relizaio/reliza-cli parsetemplate -u $RELIZA_HUB_URI -i $RELIZA_API_ID -k $RELIZA_API_KEY ${SPLIT_BUILD_ENV[0]}
           done
       - name: Check if the change happened and commit
         run: |
