@@ -6,7 +6,10 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-
+    env:
+      RELIZA_API_ID: ${{ secrets.RELIZA_API_ID }}
+      RELIZA_API_KEY: ${{ secrets.RELIZA_API_KEY }}
+      RELIZA_HUB_URI: ${{ secrets.RELIZA_HUB_URI }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -14,7 +17,7 @@ jobs:
         run: |
           # get version
           docker pull relizaio/reliza-cli
-          echo -u ${{ secrets.RELIZA_HUB_URI }}  -k ${{ secrets.RELIZA_API_KEY }} -i ${{ secrets.RELIZA_API_ID }} -b $GITHUB_REF --metadata GitHub
+          echo -u $RELIZA_HUB_URI  -k $RELIZA_API_KEY -i $RELIZA_API_ID -b $GITHUB_REF --metadata GitHub
           docker run --rm relizaio/reliza-cli getversion -u ${{ secrets.RELIZA_HUB_URI }}  -k ${{ secrets.RELIZA_API_KEY }} -i ${{ secrets.RELIZA_API_ID }} -b $GITHUB_REF --metadata GitHub > full_version_output 2>&1
           # show reliza command output in case there is error
           cat full_version_output
