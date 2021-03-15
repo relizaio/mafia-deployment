@@ -87,6 +87,8 @@ jobs:
             # send version to reliza
             echo "sending version to reliza"
             docker run --rm relizaio/reliza-cli addrelease $(cat reliza_command)
+            rm reliza_command
+            rm digest_file
             exit_status=$(echo $?)
             if [ $exit_status -ne 0 ];then echo "error on submitting metadata to Reliza Hub, failing build"; fi
             if [ $exit_status -ne 0 ];then exit 1; fi
