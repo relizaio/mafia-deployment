@@ -20,6 +20,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Helm script
         run: |
+          docker pull relizaio/reliza-cli
           echo -n sha256: > digest_file
           dir=helm; find "$dir" -type f -exec sha256sum {} \; | sed "s~$dir~~g" | sort -d | sha256sum | cut -d ' ' -f 1 >> digest_file
           echo Initial Digest:
