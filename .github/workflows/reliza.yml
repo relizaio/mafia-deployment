@@ -16,6 +16,8 @@ jobs:
       CHART_REPO_USERNAME: ${{ secrets.REGISTRY_LOGIN }}
       CHART_REPO_PASSWORD: ${{ secrets.REGISTRY_TOKEN }}
     steps:
+      - name: Record build start
+        run: echo "BUILD_START=$(date -Iseconds)" >> $GITHUB_ENV
       - name: Checkout
         uses: actions/checkout@v2
       - name: Helm script
