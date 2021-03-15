@@ -1,6 +1,6 @@
 namespace: mafia
 backend:
-  image: registry.test.relizahub.com/bfcb7315-8907-4c02-90ea-74f84a12b42f/mafia-express@sha256:956c1bbac0a40799615635f137437ceaa6414494c5157aa85a9fdfd3ee2a4df5
+  image: registry.test.relizahub.com/bfcb7315-8907-4c02-90ea-74f84a12b42f/mafia-express@sha256:2b48c42314db945af39fa876c8d60b308ee03cb305746ebf1c614ccddcf04fd6
   replicaCount: 1
   port: 3000
   targetPort: 3000
