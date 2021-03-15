@@ -10,6 +10,11 @@ jobs:
       RELIZA_API_ID: ${{ secrets.RELIZA_API_ID }}
       RELIZA_API_KEY: ${{ secrets.RELIZA_API_KEY }}
       RELIZA_HUB_URI: ${{ secrets.RELIZA_HUB_URI }}
+      HELM_PROJECT_API_ID: ${{ secrets.HELM_PROJECT_API_ID }}
+      HELM_PROJECT_API_KEY: ${{ secrets.HELM_PROJECT_API_KEY }}
+      CHART_REPO_URL: ${{ secrets.CHART_REPO_URL }}
+      CHART_REPO_USERNAME: ${{ secrets.REGISTRY_LOGIN }}
+      CHART_REPO_PASSWORD: ${{ secrets.REGISTRY_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
