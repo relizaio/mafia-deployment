@@ -1,0 +1,15 @@
+namespace: mafia-staging
+backend:
+  image: registry.test.relizahub.com/bfcb7315-8907-4c02-90ea-74f84a12b42f/mafia-express@sha256:2b48c42314db945af39fa876c8d60b308ee03cb305746ebf1c614ccddcf04fd6
+  replicaCount: 1
+  port: 3000
+  targetPort: 3000
+ui:
+  image: registry.test.relizahub.com/bfcb7315-8907-4c02-90ea-74f84a12b42f/mafia-vue@sha256:e630efe2b472c5f5a36b6fd907ea817e3204fc80ca8e31234c7e90b5fb4cdc82
+  replicaCount: 1
+  port: 80
+  targetPort: 80
+ingress:
+  nginxEnabled: false
+  traefikEnabled: true
+  host: mafia-staging.test.relizahub.com
